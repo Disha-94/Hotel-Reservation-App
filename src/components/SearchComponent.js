@@ -1,38 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, TextField, Button, Grid } from '@mui/material';
 
-const SearchComponent = ({ onSearch }) => {
-    const [searchCriteria, setSearchCriteria] = useState({
-        location: '',
-        checkin: '',
-        checkout: '',
-        adults: '1',
-        children: '0',
-        pets: '0',
-        currency: 'USD', // Default currency to USD
-    });
-
-    const handleSearch = () => {
-        // Perform validation for checkin and checkout dates
-        if (
-            !searchCriteria.location ||
-            !searchCriteria.checkin ||
-            !searchCriteria.checkout ||
-            !searchCriteria.adults
-        ) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-
-        // Additional validation can be done here, e.g., date format and range checks
-
-        onSearch(searchCriteria);
-    };
-
+const SearchComponent = ({ searchCriteria, setSearchCriteria, handleSearch }) => {
     return (
         <Box mt={3}>
-            <Grid container spacing={2}>
-                <Grid item xs={6}>
+            <Grid container spacing={2} direction="column">
+                <Grid item xs={12}>
                     <TextField
                         label="Location (City, State, Country)"
                         variant="outlined"
@@ -41,9 +14,10 @@ const SearchComponent = ({ onSearch }) => {
                             setSearchCriteria({ ...searchCriteria, location: e.target.value })
                         }
                         fullWidth
+                        required
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12}>
                     <TextField
                         label="Check-in (YYYY-MM-DD)"
                         variant="outlined"
@@ -53,12 +27,13 @@ const SearchComponent = ({ onSearch }) => {
                             setSearchCriteria({ ...searchCriteria, checkin: e.target.value })
                         }
                         fullWidth
+                        required
                         InputLabelProps={{
                             shrink: true,
                         }}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12}>
                     <TextField
                         label="Check-out (YYYY-MM-DD)"
                         variant="outlined"
@@ -68,70 +43,78 @@ const SearchComponent = ({ onSearch }) => {
                             setSearchCriteria({ ...searchCriteria, checkout: e.target.value })
                         }
                         fullWidth
+                        required
                         InputLabelProps={{
                             shrink: true,
                         }}
                     />
                 </Grid>
-                <Grid item xs={3}>
-                    <TextField
-                        label="Adults (13 and over)"
-                        variant="outlined"
-                        type="number"
-                        value={searchCriteria.adults}
-                        onChange={(e) =>
-                            setSearchCriteria({ ...searchCriteria, adults: e.target.value })
-                        }
-                        fullWidth
-                    />
+                <Grid item xs={12}>
+                    <Grid container spacing={1} direction="row">
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Adults (13 and over)"
+                                variant="outlined"
+                                type="number"
+                                value={searchCriteria.adults}
+                                onChange={(e) =>
+                                    setSearchCriteria({ ...searchCriteria, adults: e.target.value })
+                                }
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Children"
+                                variant="outlined"
+                                type="number"
+                                value={searchCriteria.children}
+                                onChange={(e) =>
+                                    setSearchCriteria({ ...searchCriteria, children: e.target.value })
+                                }
+                                fullWidth
+                            />
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                    <TextField
-                        label="Children"
-                        variant="outlined"
-                        type="number"
-                        value={searchCriteria.children}
-                        onChange={(e) =>
-                            setSearchCriteria({ ...searchCriteria, children: e.target.value })
-                        }
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <TextField
-                        label="Pets"
-                        variant="outlined"
-                        type="number"
-                        value={searchCriteria.pets}
-                        onChange={(e) =>
-                            setSearchCriteria({ ...searchCriteria, pets: e.target.value })
-                        }
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <TextField
-                        label="Currency"
-                        variant="outlined"
-                        value={searchCriteria.currency}
-                        onChange={(e) =>
-                            setSearchCriteria({ ...searchCriteria, currency: e.target.value })
-                        }
-                        fullWidth
-                    />
+                <Grid item xs={12}>
+                    <Grid container spacing={1} direction="row">
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Pets"
+                                variant="outlined"
+                                type="number"
+                                value={searchCriteria.pets}
+                                onChange={(e) =>
+                                    setSearchCriteria({ ...searchCriteria, pets: e.target.value })
+                                }
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Currency"
+                                variant="outlined"
+                                value={searchCriteria.currency}
+                                onChange={(e) =>
+                                    setSearchCriteria({ ...searchCriteria, currency: e.target.value })
+                                }
+                                fullWidth
+                            />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
             <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSearch}
+                onClick={() => handleSearch(searchCriteria)}
                 fullWidth
                 sx={{ marginTop: '20px' }}
             >
                 Search
             </Button>
-
-
         </Box>
     );
 };

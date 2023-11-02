@@ -2,13 +2,35 @@ import React, { useState } from "react";
 import SearchComponent from "../components/SearchComponent";
 import HotelList from "../components/HotelList";
 import { fetchHotels } from "../utils/clientApi";
+import { Grid } from "@mui/material";
 
-const HotelSearchContainer = ({ collapse, setCollapse }) => {
-    const [hotels, setHotels] = useState([]);
+const HotelSearchContainer = () => {
+    const [hotels, setHotels] = useState([]); //state to hold API data 
     const [loading, setLoading] = useState(false);
+    const [searchCriteria, setSearchCriteria] = useState({
+        location: '',
+        checkin: '',
+        checkout: '',
+        adults: '1',
+        children: '0',
+        pets: '0',
+        currency: 'USD', // Default currency to USD
+    }); //state to hold user-input
 
-
+    //on clicking search button, this function is called
     const handleSearch = (searchCriteria) => {
+        // Perform validation for checkin and checkout dates
+        if (
+            !searchCriteria.location ||
+            !searchCriteria.checkin ||
+            !searchCriteria.checkout ||
+            !searchCriteria.adults
+        ) {
+            alert('Something is wrong! \nPlease check your search criteria and retry. \nMake sure you fill in all required fields marked with *.');
+            return;
+        }
+        // Additional validation can be done here, e.g., date format and range checks
+
         setLoading(true);
 
         //Make an API call to fetch hotel data
@@ -20,9 +42,9 @@ const HotelSearchContainer = ({ collapse, setCollapse }) => {
                     setHotels([...hotelResults.results]);
                 } else {
                     console.error('API returned an error', hotelResults);
+                    alert(hotelResults.message);
                     setHotels([]);
                 }
-                setCollapse(true);
                 setLoading(false);
             })
             .catch(error => {
@@ -32,14 +54,22 @@ const HotelSearchContainer = ({ collapse, setCollapse }) => {
     }
 
     return (
-        <div className="container">
-            <SearchComponent onSearch={handleSearch} />
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <HotelList hotels={hotels} />
-            )}
-        </div>
+        <Grid container spacing={2} direction="row">
+            <Grid item xs={3}>
+                <SearchComponent
+                    searchCriteria={searchCriteria}
+                    setSearchCriteria={setSearchCriteria}
+                    handleSearch={handleSearch}
+                /> {/*Search component*/}
+            </Grid>
+            <Grid item xs={9}>
+                {/*Result component*/}
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <HotelList hotels={hotels} />
+                )}</Grid>
+        </Grid>
     );
 }
 

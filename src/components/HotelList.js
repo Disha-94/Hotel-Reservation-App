@@ -19,6 +19,8 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import "../App.css";
 
+//input arguments: hotel - array of objects, handleViewImages and handleReserveNow - functions
+//returns - A card, containing information about the hotel passed as argument.
 const HotelCard = ({ hotel, handleViewImages, handleReserveNow }) => {
     return (
         <Card sx={{ width: 300, mb: 2, display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
@@ -68,6 +70,8 @@ const HotelCard = ({ hotel, handleViewImages, handleReserveNow }) => {
     );
 };
 
+//input arguments: selectedImages - array of image urls, isDialogOpen - boolean, setIsDialogOpen - functions
+//returns - A dialog or pop-up, displaying a list of images passed as argument.
 const DialogBox = ({ selectedImages, isDialogOpen, setIsDialogOpen }) => (
     <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTitle>Hotel Images</DialogTitle>
@@ -101,6 +105,7 @@ const DialogBox = ({ selectedImages, isDialogOpen, setIsDialogOpen }) => (
     </Dialog>
 );
 
+//Wrapper function to map all the resulting hotels in an orderly fashion.
 const HotelList = ({ hotels }) => {
     const [selectedImages, setSelectedImages] = useState([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -114,7 +119,7 @@ const HotelList = ({ hotels }) => {
         window.open(url, '_blank');
     };
     return (
-        <Container sx={{ mt: 3, maxHeight: '80vh', overflow: 'auto' }}>
+        <Container sx={{ mt: 3, maxHeight: '90vh', overflow: 'auto' }}>
             <Box mt={3}>
                 <Grid container spacing={1}>
                     {hotels.map((hotel) => (
