@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchComponent from "../components/SearchComponent";
-import HotelList from "../components/HotelList";
+import HotelList from "../components/ResultComponent/HotelList";
 import { fetchHotels } from "../utils/clientApi";
 import { Grid } from "@mui/material";
 
@@ -62,10 +62,12 @@ const HotelSearchContainer = () => {
                     handleSearch={handleSearch}
                 /> {/*Search component*/}
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={9} sx={{ 
+                height: 'initial', 
+                backgroundImage: "url('/hotel.svg')"}}>
                 {/*Result component*/}
                 {loading ? (
-                    <p>Loading...</p>
+                    <p>Please Wait! Loading...</p>
                 ) : (
                     <HotelList hotels={hotels} />
                 )}</Grid>

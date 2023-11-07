@@ -1,16 +1,17 @@
 import React from "react";
-import { Container, Typography, CssBaseline, Divider } from '@mui/material';
+import { Container, CssBaseline } from '@mui/material';
 import HotelSearchContainer from "./containers/HotelSearchContainer";
 import './App.css';
 
 function App() {
   return (
-    <Container className="container" maxWidth="sm">
+    <Container maxWidth={false}>
       <CssBaseline />
-      <Typography variant="h3" align="center" mt={3}>
-        Hotel Reservation System
-      </Typography>
-      <Divider />
+      <div class="nine">
+        <h1>Reserve-My-Stay
+          <span>A Property Reservation System</span>
+        </h1>
+      </div>
       {/* Container that wraps search component as well as the result component */}
       <HotelSearchContainer />
     </Container>

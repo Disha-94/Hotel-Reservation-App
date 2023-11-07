@@ -1,33 +1,41 @@
 body {
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
-  background-color: #ededfa !important;
+  background-color: #fff;
   font-family: 'Roboto', sans-serif;
+  height: max-content;
 }
 
-.container {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: none !important;
-  padding-bottom: 20px;
+.nine h1 {
+  text-align:center; 
+  font-size:50px; 
+  text-transform:uppercase; 
+  color:#222; letter-spacing:1px;
+  font-family:"Playfair Display", serif; 
+  font-weight:400;
+  margin: 10px 0;
+}
+.nine h1 span {
+    font-size:15px; 
+    color:#444; 
+    word-spacing:1px; 
+    font-weight:normal; 
+    letter-spacing:2px;
+    text-transform: uppercase; 
+    font-family:"Raleway", sans-serif; 
+    font-weight:500;
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-template-rows: 27px 0;
+    grid-gap: 20px;
+    align-items: center;
 }
 
-.card-header {
-  display: inline-block;
-  outline: none;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 600;
-  border-radius: 8px;
-  padding: 13px 23px;
-  border: 1px solid #222222;
-  transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
-  background: #fff;
-  color: #222222;
-
-  :hover {
-    border-color: #000000;
-    background: #f7f7f7;
-  }
+.nine h1 span:after,.nine h1 span:before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    height: 5px;
+    background-color:#f8f8f8;
 }
