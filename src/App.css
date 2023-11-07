@@ -2,8 +2,7 @@ body {
   margin: 0 !important;
   padding: 0;
   background-color: #fff;
-  font-family: 'Roboto', sans-serif;
-  height: max-content;
+  font-family: 'Roboto', sans-serif; 
 }
 
 .nine h1 {
